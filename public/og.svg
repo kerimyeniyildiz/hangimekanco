@@ -1,0 +1,17 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF1F3"/>
+      <stop offset="1" stop-color="#FFF7ED"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="260" cy="220" r="80" fill="#FF385C"/>
+  <circle cx="980" cy="450" r="120" fill="#111827" opacity="0.08"/>
+  <text x="200" y="340" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#111827">
+    hangimekan.co
+  </text>
+  <text x="200" y="410" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#374151">
+    En iyi mekanları keşfet
+  </text>
+</svg>

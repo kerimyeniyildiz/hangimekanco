@@ -1,0 +1,8 @@
+{
+  "name": "Hangimekan.co",
+  "description": "Airbnb-style venue discovery platform featuring curated lists, detailed venue pages, and rich user reviews with media support.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
