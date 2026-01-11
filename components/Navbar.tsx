@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
               <Menu size={18} />
               <div className="bg-gray-500 rounded-full p-1 text-white overflow-hidden w-8 h-8 flex items-center justify-center">
                 {isAuthenticated && user?.avatar ? (
-                  <img src={user.avatar} alt="User" className="w-full h-full object-cover" />
+                  <Image src={user.avatar} alt="User" width={32} height={32} className="rounded-full object-cover" />
                 ) : (
                   <UserIcon size={18} fill="white" />
                 )}
