@@ -21,17 +21,17 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout = ({ children, title = 'Admin Panel' }: AdminLayoutProps) => {
-    const { user, loading, logout } = useAuth() as any; // Using any to bypass strict type check for now if Context isn't fully updated in IDE cache
+    const { user, isLoading, logout } = useAuth();
     const router = useRouter();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
-        if (!loading && (!user || !user.isAdmin)) {
+        if (!isLoading && (!user || !(user as any).isAdmin)) {
             router.push('/login?redirect=/admin');
         }
-    }, [user, loading, router]);
+    }, [user, isLoading, router]);
 
-    if (loading) {
+    if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -39,7 +39,7 @@ const AdminLayout = ({ children, title = 'Admin Panel' }: AdminLayoutProps) => {
         );
     }
 
-    if (!user || !user.isAdmin) {
+    if (!user || !(user as any).isAdmin) {
         return null; // Will redirect in useEffect
     }
 

@@ -29,7 +29,9 @@ const Login: React.FC = () => {
     if (result.error) {
       setError(result.error);
     } else {
-      router.push('/');
+      // Handle redirect parameter for admin panel or other protected routes
+      const redirectPath = typeof router.query.redirect === 'string' ? router.query.redirect : '/';
+      router.push(redirectPath);
     }
   };
 
