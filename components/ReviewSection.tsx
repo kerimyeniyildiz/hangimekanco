@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Star, ThumbsUp, ThumbsDown, Image as ImageIcon, Video, X } from 'lucide-react';
-import { Review, Media } from '../types';
+import Image from 'next/image';
+import { Review } from '../types';
 import { useAuth } from '../context/AuthContext';
 
 interface ReviewSectionProps {
@@ -12,7 +13,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ venueId, reviews }) => {
   // Use props reviews (which are now combined in VenueDetail)
   // But maintain local state for new input
   const { addReview, user, isAuthenticated } = useAuth();
-  
+
   const [newReviewText, setNewReviewText] = useState('');
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -39,7 +40,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ venueId, reviews }) => {
     e.preventDefault();
     if (!isAuthenticated) return alert("Yorum yapmak için lütfen giriş yapın.");
     if (rating === 0) return alert("Lütfen bir puan verin.");
-    
+
     const newReview: Review = {
       id: Math.random().toString(36).substr(2, 9),
       venueId: venueId, // Fixed: Now correctly associating review with the venue
@@ -83,16 +84,15 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ venueId, reviews }) => {
               >
                 <Star
                   size={28}
-                  className={`${
-                    star <= (hoverRating || rating)
-                      ? 'fill-yellow-400 text-yellow-400'
-                      : 'text-gray-300'
-                  }`}
+                  className={`${star <= (hoverRating || rating)
+                    ? 'fill-yellow-400 text-yellow-400'
+                    : 'text-gray-300'
+                    }`}
                 />
               </button>
             ))}
           </div>
-          
+
           <textarea
             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none mb-4 resize-none"
             rows={4}
@@ -111,7 +111,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ venueId, reviews }) => {
                   {m.type === 'video' ? (
                     <video src={m.preview} className="w-full h-full object-cover" />
                   ) : (
-                    <img src={m.preview} alt="preview" className="w-full h-full object-cover" />
+                    <Image src={m.preview} alt="preview" fill className="object-cover" unoptimized />
                   )}
                   <button
                     type="button"
@@ -154,17 +154,17 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ venueId, reviews }) => {
         {reviews.map((review) => (
           <div key={review.id} className="flex flex-col gap-3 border-b border-gray-100 pb-8 last:border-0 last:pb-0">
             <div className="flex items-center gap-3">
-              <img src={review.userAvatar} alt={review.userName} loading="lazy" decoding="async" className="w-12 h-12 rounded-full object-cover border border-gray-100" />
+              <Image src={review.userAvatar} alt={review.userName} width={48} height={48} className="rounded-full object-cover border border-gray-100" />
               <div>
                 <h4 className="font-semibold text-gray-900">{review.userName}</h4>
                 <p className="text-sm text-gray-500">{review.date}</p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-1 my-1">
-               {[...Array(5)].map((_, i) => (
-                 <Star key={i} size={14} className={i < review.rating ? "fill-primary text-primary" : "text-gray-300"} />
-               ))}
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={14} className={i < review.rating ? "fill-primary text-primary" : "text-gray-300"} />
+              ))}
             </div>
 
             <p className="text-gray-700 leading-relaxed text-sm md:text-base">
@@ -175,25 +175,25 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ venueId, reviews }) => {
             {review.media.length > 0 && (
               <div className="flex gap-2 overflow-x-auto py-2">
                 {review.media.map((media, idx) => (
-                   <div key={idx} className="w-32 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer">
-                     {media.type === 'video' ? (
-                       <video src={media.url} className="w-full h-full object-cover" controls />
-                     ) : (
-                       <img src={media.url} alt="Review attachment" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition duration-300" />
-                     )}
-                   </div>
+                  <div key={idx} className="w-32 h-24 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 cursor-pointer">
+                    {media.type === 'video' ? (
+                      <video src={media.url} className="w-full h-full object-cover" controls />
+                    ) : (
+                      <img src={media.url} alt="Review attachment" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition duration-300" />
+                    )}
+                  </div>
                 ))}
               </div>
             )}
 
             <div className="flex gap-4 mt-2">
-              <button 
+              <button
                 className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-green-600 transition"
               >
                 <ThumbsUp size={16} />
                 <span>Faydalı ({review.likes})</span>
               </button>
-              <button 
+              <button
                 className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-600 transition"
               >
                 <ThumbsDown size={16} />

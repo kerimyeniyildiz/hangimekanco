@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search, Menu, User as UserIcon, Globe, LogOut } from 'lucide-react';
 import Link from './AppLink';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext';
 
@@ -45,7 +46,7 @@ const Navbar: React.FC = () => {
 
           {/* Search Bar - Center */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md mx-8 items-center bg-white border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-shadow cursor-pointer py-1.5 pl-4 pr-1.5">
-            <input 
+            <input
               type="text"
               placeholder="Mekan veya semt ara..."
               className="flex-grow bg-transparent border-none outline-none text-sm text-gray-900 placeholder-gray-500 font-medium px-2"
@@ -58,19 +59,19 @@ const Navbar: React.FC = () => {
           </form>
 
           {/* Mobile Search Trigger */}
-           <div className="md:hidden flex-1 mx-4">
-             <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 border border-gray-200">
-                <Search size={16} className="text-gray-500 mr-2"/>
-                <input 
-                  type="text"
-                  placeholder="Keşfet..."
-                  className="bg-transparent border-none outline-none text-sm w-full"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)}
-                />
-             </div>
-           </div>
+          <div className="md:hidden flex-1 mx-4">
+            <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 border border-gray-200">
+              <Search size={16} className="text-gray-500 mr-2" />
+              <input
+                type="text"
+                placeholder="Keşfet..."
+                className="bg-transparent border-none outline-none text-sm w-full"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)}
+              />
+            </div>
+          </div>
 
           {/* Right Section */}
           <div className="hidden md:flex items-center gap-4 flex-shrink-0">
@@ -80,18 +81,18 @@ const Navbar: React.FC = () => {
             <button className="p-2 hover:bg-gray-100 rounded-full">
               <Globe size={18} />
             </button>
-            
-            <div 
+
+            <div
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="flex items-center gap-2 border border-gray-300 rounded-full p-1 pl-3 hover:shadow-md cursor-pointer transition relative"
             >
               <Menu size={18} />
               <div className="bg-gray-500 rounded-full p-1 text-white overflow-hidden w-8 h-8 flex items-center justify-center">
-                 {isAuthenticated && user?.avatar ? (
-                   <img src={user.avatar} alt="User" className="w-full h-full object-cover" />
-                 ) : (
-                   <UserIcon size={18} fill="white" />
-                 )}
+                {isAuthenticated && user?.avatar ? (
+                  <img src={user.avatar} alt="User" className="w-full h-full object-cover" />
+                ) : (
+                  <UserIcon size={18} fill="white" />
+                )}
               </div>
 
               {isMenuOpen && (

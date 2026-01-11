@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -8,7 +9,6 @@ import {
     List,
     MessageSquare,
     Calendar,
-    Settings,
     LogOut,
     Menu,
     X
@@ -54,7 +54,11 @@ const AdminLayout = ({ children, title = 'Admin Panel' }: AdminLayoutProps) => {
 
     return (
         <>
-            <Seo title={`${title} | hangimekan.co`} noIndex={true} />
+            <Seo
+                title={`${title} | hangimekan.co`}
+                description="Admin Panel"
+                noIndex={true}
+            />
 
             <div className="min-h-screen bg-gray-100 flex">
                 {/* Mobile Sidebar Overlay */}
@@ -111,10 +115,12 @@ const AdminLayout = ({ children, title = 'Admin Panel' }: AdminLayoutProps) => {
                         {/* User Profile */}
                         <div className="p-4 border-t border-gray-200">
                             <div className="flex items-center gap-3 px-4 py-3 mb-2">
-                                <img
+                                <Image
                                     src={user.avatar}
                                     alt={user.name}
-                                    className="w-8 h-8 rounded-full bg-gray-200"
+                                    width={32}
+                                    height={32}
+                                    className="rounded-full bg-gray-200"
                                 />
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-900 truncate">

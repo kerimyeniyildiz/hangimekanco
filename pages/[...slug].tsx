@@ -14,7 +14,6 @@ import {
   getUniqueDistricts,
   getVenueById,
 } from '../services/supabase-api';
-import { slugify } from '../services/slug';
 
 interface VenueType {
   id: string;

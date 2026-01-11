@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Plus, Search, Edit, Trash2, MapPin, Star } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import { supabase } from '../../../lib/supabase';
@@ -111,10 +112,12 @@ const VenuesPage = () => {
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
                                                 <div className="h-10 w-10 flex-shrink-0">
-                                                    <img
-                                                        className="h-10 w-10 rounded-lg object-cover"
+                                                    <Image
+                                                        className="rounded-lg object-cover"
                                                         src={venue.images?.[0] || 'https://via.placeholder.com/100'}
                                                         alt=""
+                                                        width={40}
+                                                        height={40}
                                                     />
                                                 </div>
                                                 <div className="ml-4">
