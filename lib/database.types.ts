@@ -213,6 +213,7 @@ export interface Database {
                     bio: string | null;
                     location: string | null;
                     is_verified: boolean;
+                    is_admin: boolean;
                     created_at: string;
                 };
                 Insert: {
@@ -222,6 +223,7 @@ export interface Database {
                     bio?: string | null;
                     location?: string | null;
                     is_verified?: boolean;
+                    is_admin?: boolean;
                     created_at?: string;
                 };
                 Update: {
@@ -231,6 +233,7 @@ export interface Database {
                     bio?: string | null;
                     location?: string | null;
                     is_verified?: boolean;
+                    is_admin?: boolean;
                     created_at?: string;
                 };
             };

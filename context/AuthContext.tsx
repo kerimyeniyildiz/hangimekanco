@@ -11,6 +11,7 @@ interface User {
   location?: string;
   joinDate?: string;
   isVerified?: boolean;
+  isAdmin?: boolean;
 }
 
 interface Reservation {
@@ -81,7 +82,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       .eq('id', supabaseUser.id)
       .single();
 
-    const profile = profileData as { name?: string; avatar?: string; bio?: string; location?: string; is_verified?: boolean } | null;
+    const profile = profileData as { name?: string; avatar?: string; bio?: string; location?: string; is_verified?: boolean; is_admin?: boolean } | null;
 
     const userName = profile?.name || supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'Kullanıcı';
 
@@ -94,6 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       location: profile?.location || '',
       joinDate: new Date(supabaseUser.created_at).toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' }),
       isVerified: profile?.is_verified || false,
+      isAdmin: profile?.is_admin || false,
     };
   }, []);
 
